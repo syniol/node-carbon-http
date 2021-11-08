@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Request Test given GET request is made should bring a response back in JSON format 1`] = `
+Object {
+  "count": Any<Number>,
+  "gender": "male",
+  "name": "hadi",
+  "probability": Any<Number>,
+}
+`;
