@@ -13,14 +13,17 @@ import {
 } from './http'
 
 export default class HydroHTTP {
+  readonly #forcedClient: boolean;
   #client: RequestType
 
   public constructor(client?: RequestType) {
     if (client) {
       this.#client = client
+      this.#forcedClient = true;
     }
 
     this.#client = InSecureRequest
+    this.#forcedClient = false;
   }
 
   private response(dataBlocks: Uint8Array[], status: number): HttpResponse {
@@ -51,7 +54,9 @@ export default class HydroHTTP {
     }
 
     if (urlObject?.protocol === 'https:') {
-      this.#client = SecureRequest
+      if (!this.#forcedClient) {
+        this.#client = SecureRequest
+      }
 
       Object.assign(opt, { hostname: urlObject.hostname })
     } else {
