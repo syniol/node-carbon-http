@@ -17,13 +17,13 @@ export default class HydroHTTP {
   #client: RequestType
 
   public constructor(client?: RequestType) {
+    this.#forcedClient = false;
+    this.#client = InSecureRequest
+
     if (client) {
       this.#client = client
       this.#forcedClient = true;
     }
-
-    this.#client = InSecureRequest
-    this.#forcedClient = false;
   }
 
   private response(dataBlocks: Uint8Array[], status: number): HttpResponse {
@@ -76,7 +76,10 @@ export default class HydroHTTP {
 
         res.on('end', () => {
           resolve(
-            this.response(dataCollection, res?.statusCode || HttpStatusCode.OK),
+            this.response(
+              dataCollection,
+              res?.statusCode || HttpStatusCode.OK
+            ),
           )
         })
       })
