@@ -326,3 +326,4 @@ var HttpStatusCode;
      */
     HttpStatusCode[HttpStatusCode["UNSUPPORTED_MEDIA_TYPE"] = 415] = "UNSUPPORTED_MEDIA_TYPE";
 })(HttpStatusCode = exports.HttpStatusCode || (exports.HttpStatusCode = {}));
+//# sourceMappingURL=codes.js.map

@@ -1,0 +1,10 @@
+# Folders
+src/
+test/
+
+
+# Files
+.gitignore
+.prettierrc
+jest.config.js
+tsconfig.json

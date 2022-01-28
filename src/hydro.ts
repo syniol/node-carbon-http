@@ -12,6 +12,7 @@ import {
   HttpStatusCode
 } from './http'
 
+
 export default class HydroHTTP {
   readonly #forcedClient: boolean;
   #client: RequestType
@@ -26,7 +27,10 @@ export default class HydroHTTP {
     }
   }
 
-  private response(dataBlocks: Uint8Array[], status: number): HttpResponse {
+  private response(
+    dataBlocks: Uint8Array[],
+    status: number
+  ): Readonly<HttpResponse> {
     const result = Buffer.concat(dataBlocks).toString()
 
     return {
@@ -50,7 +54,7 @@ export default class HydroHTTP {
       headers: context?.headers,
       path: `${urlObject.pathname}${urlObject.search || ''}`,
       body: new TextEncoder().encode(context?.body),
-      port: urlObject.port,
+      port: context?.port ? context?.port : urlObject.port,
     }
 
     if (urlObject?.protocol === 'https:') {

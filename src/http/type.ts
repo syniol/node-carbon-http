@@ -8,6 +8,7 @@ import { URL } from 'url'
 
 import { HttpStatusCode } from './codes'
 
+
 export type RequestType = (
   options: InSecureRequestOpt | SecureRequestOpt | string | URL,
   callback?: (res: InSecureIncomingMessage) => void,
@@ -19,6 +20,10 @@ export enum HttpMethod {
   PUT = 'PUT',
   DELETE = 'DELETE',
   PATCH = 'PATCH',
+  HEAD = 'HEAD',
+  CONNECT = 'CONNECT',
+  OPTIONS = 'OPTIONS',
+  TRACE = 'TRACE',
 }
 
 export interface HttpRequestContext {

@@ -9,7 +9,11 @@ export declare enum HttpMethod {
     POST = "POST",
     PUT = "PUT",
     DELETE = "DELETE",
-    PATCH = "PATCH"
+    PATCH = "PATCH",
+    HEAD = "HEAD",
+    CONNECT = "CONNECT",
+    OPTIONS = "OPTIONS",
+    TRACE = "TRACE"
 }
 export interface HttpRequestContext {
     [key: string]: any;

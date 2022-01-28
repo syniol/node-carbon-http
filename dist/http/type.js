@@ -8,4 +8,9 @@ var HttpMethod;
     HttpMethod["PUT"] = "PUT";
     HttpMethod["DELETE"] = "DELETE";
     HttpMethod["PATCH"] = "PATCH";
+    HttpMethod["HEAD"] = "HEAD";
+    HttpMethod["CONNECT"] = "CONNECT";
+    HttpMethod["OPTIONS"] = "OPTIONS";
+    HttpMethod["TRACE"] = "TRACE";
 })(HttpMethod = exports.HttpMethod || (exports.HttpMethod = {}));
+//# sourceMappingURL=type.js.map

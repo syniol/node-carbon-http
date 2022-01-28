@@ -2,6 +2,7 @@ import { HttpStatusCode, RequestType } from './http'
 import { Buffer } from 'buffer'
 import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'http'
 
+
 export default class HydroHTTPMock {
   public readonly client: RequestType
 

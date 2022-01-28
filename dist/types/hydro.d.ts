@@ -4,5 +4,4 @@ export default class HydroHTTP {
     constructor(client?: RequestType);
     private response;
     request(url: string, context?: HttpRequestContext): Promise<HttpResponse>;
-    requestConcurrently(url: string, context?: HttpRequestContext): Promise<any>;
 }
