@@ -1,5 +1,5 @@
 {
-  "name": "hydro-http",
+  "name": "carbon-http",
   "version": "1.0.0",
   "description": "Node.js Lightest HTTP(s) request wrapper",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "jest",
-    "prepublish": "jest && rm -rf ./dist && tsc"
+    "prepare": "jest && rm -rf ./dist && tsc"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",

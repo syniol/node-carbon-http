@@ -1,5 +1,6 @@
-# Node Hydro HTTP
-Hydro is simplified http(s) library exclusively for Node.js; written in TypeScript.
+# Node Carbon HTTP
+Hydro is simplified http(s) library exclusively for Node.js; written in TypeScript and
+transpiled to JavaScript.
 
 
 ## Motivation
@@ -72,4 +73,4 @@ Answer is very easy to use.
 
 
 ##### Credits
-Copyright &copy; 2021 Syniol Limited. All rights reserved.
+Copyright &copy; 2022 Syniol Limited. All rights reserved.
