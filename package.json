@@ -1,7 +1,17 @@
 {
   "name": "carbon-http",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0",
   "description": "Node.js Lightest HTTP(s) request wrapper",
+  "keywords": [
+    "http",
+    "https",
+    "request",
+    "node",
+    "typescript",
+    "es5",
+    "es6",
+    "esnext"
+  ],
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "repository": "https://github.com/syniol/node-carbon-http",

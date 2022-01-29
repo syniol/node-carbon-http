@@ -100,26 +100,6 @@ describe('Request Unit Test', () => {
     })
   })
 
-  describe('given an unknown response been received and without status code', () => {
-    let actual: any = undefined
-
-    beforeAll(async () => {
-      actual = await sut(
-        'http://api.syniol.com/v2/users/hadi',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        },
-        CarbonClientMock(''),
-      )
-    })
-
-    it('should have status of OK `200`', () => {
-      expect(actual.status).toEqual(HttpStatusCode.OK)
-    })
-  })
-
   describe('given error been thrown during request', () => {
     it('should throw an error', () => {
       expect(() =>

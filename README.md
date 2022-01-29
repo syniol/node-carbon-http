@@ -1,4 +1,4 @@
-# Node Carbon HTTP
+# Carbon HTTP
 Carbon HTTP is simplified http(s) library exclusively for Node.js; 
 written in TypeScript and transpiled to JavaScript. It would be a 
 great replacement for libraries such as: node-fetch, axios, end etc.
@@ -7,28 +7,32 @@ great replacement for libraries such as: node-fetch, axios, end etc.
 ## Motivation
 There are few libraries for a same purpose but most are implemented 
 for both Browser API and Node runtime. Given exising libraries try to 
-meet the needs both for Browser API and Node; cause many complications 
+meet the needs both for Browser API and Node; it, cause many complications 
 for enterprise level applications. For example:  writing unit test could 
 be extremely frustrating and might require a third-party test library due 
 to poor engineering of original library itself.
 
+You could also have to upgrade your library due to security vulnerability of many 
+dependency of library itself. On the other hand, __Carbon HTTP__ has no third-party 
+dependency and been developed and maintained in Great Britain.
 
-### How to use
+
+## How to use
 Answer is very easy to use. You can find few examples below for most commonly 
 used Methods: `GET` and `POST`.
 
 
-#### Module Import
+### Module Import
 _ES5:_
 
-    const Request = require('carbon-http');
+    const { Request } = require('carbon-http');
 
 _ES6+_
 
     import { Request } from 'carbon-http'
 
 
-#### GET Request Example
+### GET Request Example
 
 ```javascript
 const resp = await Request('https://api.syniol.com/v2/user/hadi/history');
@@ -43,7 +47,7 @@ console.log(resp.json())
 }
 ```
 
-#### POST Request Example
+### POST Request Example
 
 ```javascript
 const resp = await Request(
@@ -67,18 +71,20 @@ console.log(resp.json())
 ```
 
 
-#### Unit Tests and Mocking Example
+### Unit Tests and Mocking Example
 You could also test your endpoints with Mock API given in this library
-and accessible by `CarbonHTTPMock` for your unit tests.
+and accessible by `CarbonClientMock` for your unit tests.
 
 ```javascript
-const carbonHTTPMock = CarbonClientMock(JSON.stringify(
-    { 
-      status: 'success' 
+const resp = await Request(
+  'https://api.syniol.com/v2/user',
+  undefined,
+  CarbonClientMock(JSON.stringify(
+    {
+      status: 'success'
     }
-  ), 200);
-
-const resp = await Request('https://api.syniol.com/v2/user');
+  ), 200),
+);
 
 console.log(resp.json())
 

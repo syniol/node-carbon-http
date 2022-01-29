@@ -1,6 +1,3 @@
 import { HttpStatusCode, NodeRequestClient } from './http';
-export declare class CarbonHTTPMock {
-    readonly client: NodeRequestClient;
-    constructor(arg: string | Error, statusCode?: HttpStatusCode);
-}
+export declare function CarbonClientMock(arg: string | Error, statusCode?: HttpStatusCode): NodeRequestClient;
 //# sourceMappingURL=carbon.mock.d.ts.map

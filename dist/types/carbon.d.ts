@@ -1,9 +1,3 @@
 import { NodeRequestClient, CarbonHttpRequestOption, CarbonHttpResponse } from './http';
-export declare class CarbonHTTP {
-    private readonly forcedClient;
-    private client;
-    constructor(client?: NodeRequestClient);
-    private response;
-    request(url: Readonly<string>, opt?: CarbonHttpRequestOption): Promise<Readonly<CarbonHttpResponse>>;
-}
+export declare function Request(url: Readonly<string>, opt?: CarbonHttpRequestOption, clientService?: NodeRequestClient | any): Promise<Readonly<CarbonHttpResponse>>;
 //# sourceMappingURL=carbon.d.ts.map

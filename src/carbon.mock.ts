@@ -2,6 +2,7 @@ import { HttpStatusCode, NodeRequestClient } from './http'
 import { Buffer } from 'buffer'
 import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'http'
 
+
 export function CarbonClientMock(
   arg: string | Error,
   statusCode?: HttpStatusCode,
