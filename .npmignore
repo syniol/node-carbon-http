@@ -1,7 +1,8 @@
 # Folders
 src/
 test/
-
+coverage/
+.idea/
 
 # Files
 .gitignore
