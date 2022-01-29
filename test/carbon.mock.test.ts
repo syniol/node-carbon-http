@@ -1,16 +1,16 @@
-import HydroHTTP from '../src/hydro'
-import HydroHTTPMock from '../src/hydro.mock'
+import CarbonHTTP from '../src/carbon'
+import CarbonHTTPMock from '../src/carbon.mock'
 import { HttpStatusCode } from '../src/http'
 
 describe('Request Unit Test', () => {
-  let sut: HydroHTTP
+  let sut: CarbonHTTP
 
   describe('given successful response been received', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new HydroHTTP(
-        new HydroHTTPMock(
+      sut = new CarbonHTTP(
+        new CarbonHTTPMock(
           JSON.stringify({
             username: 'hadi',
             lastLoginDate: '2021-09-12',
@@ -37,8 +37,8 @@ describe('Request Unit Test', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new HydroHTTP(
-        new HydroHTTPMock('{}', HttpStatusCode.FORBIDDEN).client,
+      sut = new CarbonHTTP(
+        new CarbonHTTPMock('{}', HttpStatusCode.FORBIDDEN).client,
       )
 
       actual = await sut.request('http://api.syniol.com/v2/users/hadi')
@@ -55,7 +55,7 @@ describe('Request Unit Test', () => {
 
   describe('given error been thrown during request', () => {
     beforeAll(async () => {
-      sut = new HydroHTTP(new HydroHTTPMock(new Error('Unexpected')).client)
+      sut = new CarbonHTTP(new CarbonHTTPMock(new Error('Unexpected')).client)
     })
 
     it('should throw an error', () => {

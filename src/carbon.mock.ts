@@ -3,7 +3,7 @@ import { Buffer } from 'buffer'
 import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'http'
 
 
-export default class HydroHTTPMock {
+export default class CarbonHTTPMock {
   public readonly client: RequestType
 
   public constructor(arg: string | Error, statusCode?: HttpStatusCode) {

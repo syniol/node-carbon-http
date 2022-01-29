@@ -13,7 +13,7 @@ import {
 } from './http'
 
 
-export default class HydroHTTP {
+export default class CarbonHTTP {
   readonly #forcedClient: boolean;
   #client: RequestType
 

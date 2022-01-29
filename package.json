@@ -4,7 +4,7 @@
   "description": "Node.js Lightest HTTP(s) request wrapper",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "repository": "https://github.com/syniol/node-hydro",
+  "repository": "https://github.com/syniol/node-carbon-http",
   "author": "Hadi Tajallaei <hadi@syniol.com>",
   "license": "MIT",
   "private": false,

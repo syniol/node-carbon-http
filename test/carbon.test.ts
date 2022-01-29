@@ -1,15 +1,15 @@
-import HydroHTTP from '../src/hydro'
+import CarbonHTTP from '../src/carbon'
 import { HttpResponse } from '../src/http'
 
 describe('Request Test', () => {
-  let sut: HydroHTTP
+  let sut: CarbonHTTP
 
   beforeAll(() => {
-    sut = new HydroHTTP()
+    sut = new CarbonHTTP()
   })
 
   it('should be instantiable', () => {
-    expect(sut).toBeInstanceOf(HydroHTTP)
+    expect(sut).toBeInstanceOf(CarbonHTTP)
   })
 
   describe('given GET request is made', () => {

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = require("./http");
 const buffer_1 = require("buffer");
-class HydroHTTPMock {
+class CarbonHTTPMock {
     constructor(arg, statusCode) {
         this.client = (_, callback) => {
             if (typeof callback === 'function') {
@@ -38,5 +38,5 @@ class HydroHTTPMock {
         };
     }
 }
-exports.default = HydroHTTPMock;
-//# sourceMappingURL=hydro.mock.js.map
+exports.default = CarbonHTTPMock;
+//# sourceMappingURL=carbon.mock.js.map

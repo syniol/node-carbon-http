@@ -10,22 +10,22 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _HydroHTTP_forcedClient, _HydroHTTP_client;
+var _CarbonHTTP_forcedClient, _CarbonHTTP_client;
 Object.defineProperty(exports, "__esModule", { value: true });
 const url_1 = require("url");
 const util_1 = require("util");
 const http_1 = require("http");
 const https_1 = require("https");
 const http_2 = require("./http");
-class HydroHTTP {
+class CarbonHTTP {
     constructor(client) {
-        _HydroHTTP_forcedClient.set(this, void 0);
-        _HydroHTTP_client.set(this, void 0);
-        __classPrivateFieldSet(this, _HydroHTTP_forcedClient, false, "f");
-        __classPrivateFieldSet(this, _HydroHTTP_client, http_1.request, "f");
+        _CarbonHTTP_forcedClient.set(this, void 0);
+        _CarbonHTTP_client.set(this, void 0);
+        __classPrivateFieldSet(this, _CarbonHTTP_forcedClient, false, "f");
+        __classPrivateFieldSet(this, _CarbonHTTP_client, http_1.request, "f");
         if (client) {
-            __classPrivateFieldSet(this, _HydroHTTP_client, client, "f");
-            __classPrivateFieldSet(this, _HydroHTTP_forcedClient, true, "f");
+            __classPrivateFieldSet(this, _CarbonHTTP_client, client, "f");
+            __classPrivateFieldSet(this, _CarbonHTTP_forcedClient, true, "f");
         }
     }
     response(dataBlocks, status) {
@@ -50,8 +50,8 @@ class HydroHTTP {
             port: (context === null || context === void 0 ? void 0 : context.port) ? context === null || context === void 0 ? void 0 : context.port : urlObject.port,
         };
         if ((urlObject === null || urlObject === void 0 ? void 0 : urlObject.protocol) === 'https:') {
-            if (!__classPrivateFieldGet(this, _HydroHTTP_forcedClient, "f")) {
-                __classPrivateFieldSet(this, _HydroHTTP_client, https_1.request, "f");
+            if (!__classPrivateFieldGet(this, _CarbonHTTP_forcedClient, "f")) {
+                __classPrivateFieldSet(this, _CarbonHTTP_client, https_1.request, "f");
             }
             Object.assign(opt, { hostname: urlObject.hostname });
         }
@@ -59,7 +59,7 @@ class HydroHTTP {
             Object.assign(opt, { host: urlObject.host });
         }
         return new Promise((resolve, reject) => {
-            const req = __classPrivateFieldGet(this, _HydroHTTP_client, "f").call(this, opt, (res) => {
+            const req = __classPrivateFieldGet(this, _CarbonHTTP_client, "f").call(this, opt, (res) => {
                 const dataCollection = [];
                 res.on('data', (data) => {
                     dataCollection.push(data);
@@ -76,6 +76,6 @@ class HydroHTTP {
         });
     }
 }
-exports.default = HydroHTTP;
-_HydroHTTP_forcedClient = new WeakMap(), _HydroHTTP_client = new WeakMap();
-//# sourceMappingURL=hydro.js.map
+exports.default = CarbonHTTP;
+_CarbonHTTP_forcedClient = new WeakMap(), _CarbonHTTP_client = new WeakMap();
+//# sourceMappingURL=carbon.js.map

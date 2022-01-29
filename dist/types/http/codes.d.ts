@@ -322,3 +322,4 @@ export declare enum HttpStatusCode {
      */
     UNSUPPORTED_MEDIA_TYPE = 415
 }
+//# sourceMappingURL=codes.d.ts.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"carbon.mock.d.ts","sourceRoot":"","sources":["../../src/carbon.mock.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,WAAW,EAAE,MAAM,QAAQ,CAAA;AAKpD,MAAM,CAAC,OAAO,OAAO,cAAc;IACjC,SAAgB,MAAM,EAAE,WAAW,CAAA;gBAEhB,GAAG,EAAE,MAAM,GAAG,KAAK,EAAE,UAAU,CAAC,EAAE,cAAc;CAwCpE"}

@@ -27,3 +27,4 @@ export interface HttpResponse {
     text(): string;
     json(): any;
 }
+//# sourceMappingURL=type.d.ts.map
