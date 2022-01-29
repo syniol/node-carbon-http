@@ -1,5 +1,5 @@
 import CarbonHTTP from '../src/carbon'
-import { HttpResponse } from '../src/http'
+import { CarbonHttpResponse } from '../src/http'
 
 describe('Request Test', () => {
   let sut: CarbonHTTP
@@ -13,7 +13,7 @@ describe('Request Test', () => {
   })
 
   describe('given GET request is made', () => {
-    let actual: HttpResponse;
+    let actual: CarbonHttpResponse;
 
     beforeAll(async () => {
       actual = await sut.request('https://api.genderize.io/?name=hadi')

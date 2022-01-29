@@ -1,10 +1,10 @@
-import { HttpStatusCode, RequestType } from './http'
+import { HttpStatusCode, NodeRequestClient } from './http'
 import { Buffer } from 'buffer'
 import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'http'
 
 
 export default class CarbonHTTPMock {
-  public readonly client: RequestType
+  public readonly client: NodeRequestClient
 
   public constructor(arg: string | Error, statusCode?: HttpStatusCode) {
     this.client = (_, callback) => {

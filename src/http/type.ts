@@ -9,10 +9,20 @@ import { URL } from 'url'
 import { HttpStatusCode } from './codes'
 
 
-export type RequestType = (
+export type NodeRequestClient = (
   options: InSecureRequestOpt | SecureRequestOpt | string | URL,
   callback?: (res: InSecureIncomingMessage) => void,
 ) => ClientRequest
+
+export interface NodeRequestOption {
+  path?: string
+  hostname?: string
+  host?: string
+  headers?: Record<string, string>
+  method?: HttpMethod
+  body?: string | Uint8Array
+  port?: number | string
+}
 
 export enum HttpMethod {
   GET = 'GET',
@@ -26,16 +36,14 @@ export enum HttpMethod {
   TRACE = 'TRACE',
 }
 
-export interface HttpRequestContext {
-  [key: string]: any
-
-  headers?: any
+export interface CarbonHttpRequestOption {
+  headers?: Record<string, string>
   method?: HttpMethod
   body?: string
   port?: number
 }
 
-export interface HttpResponse {
+export interface CarbonHttpResponse {
   status: HttpStatusCode
 
   text(): string

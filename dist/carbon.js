@@ -44,19 +44,21 @@ class CarbonHTTP {
         const urlObject = new url_1.URL(url);
         const opt = {
             method: (context === null || context === void 0 ? void 0 : context.method) || http_2.HttpMethod.GET,
-            headers: context === null || context === void 0 ? void 0 : context.headers,
             path: `${urlObject.pathname}${urlObject.search || ''}`,
             body: new util_1.TextEncoder().encode(context === null || context === void 0 ? void 0 : context.body),
-            port: (context === null || context === void 0 ? void 0 : context.port) ? context === null || context === void 0 ? void 0 : context.port : urlObject.port,
+            port: (context === null || context === void 0 ? void 0 : context.port) ? context.port : urlObject.port,
         };
+        if (context === null || context === void 0 ? void 0 : context.headers) {
+            opt.headers = context.headers;
+        }
         if ((urlObject === null || urlObject === void 0 ? void 0 : urlObject.protocol) === 'https:') {
             if (!__classPrivateFieldGet(this, _CarbonHTTP_forcedClient, "f")) {
                 __classPrivateFieldSet(this, _CarbonHTTP_client, https_1.request, "f");
             }
-            Object.assign(opt, { hostname: urlObject.hostname });
+            opt.hostname = urlObject.hostname;
         }
         else {
-            Object.assign(opt, { host: urlObject.host });
+            opt.host = urlObject.host;
         }
         return new Promise((resolve, reject) => {
             const req = __classPrivateFieldGet(this, _CarbonHTTP_client, "f").call(this, opt, (res) => {

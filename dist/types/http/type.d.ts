@@ -3,7 +3,16 @@ import { ClientRequest, IncomingMessage as InSecureIncomingMessage, RequestOptio
 import { RequestOptions as SecureRequestOpt } from 'https';
 import { URL } from 'url';
 import { HttpStatusCode } from './codes';
-export declare type RequestType = (options: InSecureRequestOpt | SecureRequestOpt | string | URL, callback?: (res: InSecureIncomingMessage) => void) => ClientRequest;
+export declare type NodeRequestClient = (options: InSecureRequestOpt | SecureRequestOpt | string | URL, callback?: (res: InSecureIncomingMessage) => void) => ClientRequest;
+export interface NodeRequestOption {
+    path?: string;
+    hostname?: string;
+    host?: string;
+    headers?: Record<string, string>;
+    method?: HttpMethod;
+    body?: string | Uint8Array;
+    port?: number | string;
+}
 export declare enum HttpMethod {
     GET = "GET",
     POST = "POST",
@@ -15,14 +24,13 @@ export declare enum HttpMethod {
     OPTIONS = "OPTIONS",
     TRACE = "TRACE"
 }
-export interface HttpRequestContext {
-    [key: string]: any;
-    headers?: any;
+export interface CarbonHttpRequestOption {
+    headers?: Record<string, string>;
     method?: HttpMethod;
     body?: string;
     port?: number;
 }
-export interface HttpResponse {
+export interface CarbonHttpResponse {
     status: HttpStatusCode;
     text(): string;
     json(): any;

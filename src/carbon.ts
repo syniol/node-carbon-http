@@ -5,19 +5,20 @@ import { request as InSecureRequest } from 'http'
 import { request as SecureRequest } from 'https'
 
 import {
-  RequestType,
+  NodeRequestClient,
+  NodeRequestOption,
+  CarbonHttpRequestOption,
+  CarbonHttpResponse,
+  HttpStatusCode,
   HttpMethod,
-  HttpRequestContext,
-  HttpResponse,
-  HttpStatusCode
 } from './http'
 
 
 export default class CarbonHTTP {
   readonly #forcedClient: boolean;
-  #client: RequestType
+  #client: NodeRequestClient
 
-  public constructor(client?: RequestType) {
+  public constructor(client?: NodeRequestClient) {
     this.#forcedClient = false;
     this.#client = InSecureRequest
 
@@ -29,9 +30,11 @@ export default class CarbonHTTP {
 
   private response(
     dataBlocks: Uint8Array[],
-    status: number
-  ): Readonly<HttpResponse> {
-    const result = Buffer.concat(dataBlocks).toString()
+    status: Readonly<number>
+  ): Readonly<CarbonHttpResponse> {
+    const result: Readonly<string> = Buffer
+      .concat(dataBlocks)
+      .toString()
 
     return {
       status: status,
@@ -46,15 +49,18 @@ export default class CarbonHTTP {
 
   public request(
     url: string,
-    context?: HttpRequestContext,
-  ): Promise<HttpResponse> {
+    context?: CarbonHttpRequestOption,
+  ): Promise<Readonly<CarbonHttpResponse>> {
     const urlObject = new URL(url)
-    const opt = {
+    const opt: NodeRequestOption = {
       method: context?.method || HttpMethod.GET,
-      headers: context?.headers,
       path: `${urlObject.pathname}${urlObject.search || ''}`,
       body: new TextEncoder().encode(context?.body),
-      port: context?.port ? context?.port : urlObject.port,
+      port: context?.port ? context.port : urlObject.port,
+    }
+
+    if (context?.headers) {
+      opt.headers = context.headers;
     }
 
     if (urlObject?.protocol === 'https:') {
@@ -62,9 +68,9 @@ export default class CarbonHTTP {
         this.#client = SecureRequest
       }
 
-      Object.assign(opt, { hostname: urlObject.hostname })
+      opt.hostname = urlObject.hostname;
     } else {
-      Object.assign(opt, { host: urlObject.host })
+      opt.host = urlObject.host;
     }
 
     return new Promise((resolve, reject) => {
