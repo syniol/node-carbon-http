@@ -24,6 +24,10 @@ export declare enum HttpMethod {
     OPTIONS = "OPTIONS",
     TRACE = "TRACE"
 }
+export declare enum HttpProtocol {
+    SecureHTTP = "https:",
+    InSecureHTTP = "http:"
+}
 export interface CarbonHttpRequestOption {
     headers?: Record<string, string>;
     method?: HttpMethod;

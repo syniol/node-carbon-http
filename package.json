@@ -1,6 +1,6 @@
 {
   "name": "carbon-http",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Node.js Lightest HTTP(s) request wrapper",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",

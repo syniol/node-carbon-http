@@ -11,6 +11,7 @@ import {
   CarbonHttpResponse,
   HttpStatusCode,
   HttpMethod,
+  HttpProtocol,
 } from './http'
 
 
@@ -47,34 +48,34 @@ export default class CarbonHTTP {
     }
   }
 
-  public request(
-    url: string,
-    context?: CarbonHttpRequestOption,
+  public async request(
+    url: Readonly<string>,
+    opt?: CarbonHttpRequestOption,
   ): Promise<Readonly<CarbonHttpResponse>> {
-    const urlObject = new URL(url)
-    const opt: NodeRequestOption = {
-      method: context?.method || HttpMethod.GET,
-      path: `${urlObject.pathname}${urlObject.search || ''}`,
-      body: new TextEncoder().encode(context?.body),
-      port: context?.port ? context.port : urlObject.port,
+    const urlAPI = new URL(url)
+    const nodeReqOpt: NodeRequestOption = {
+      method: opt?.method || HttpMethod.GET,
+      path: `${urlAPI.pathname}${urlAPI.search || ''}`,
+      body: new TextEncoder().encode(opt?.body),
+      port: opt?.port ? opt.port : urlAPI.port,
     }
 
-    if (context?.headers) {
-      opt.headers = context.headers;
+    if (opt?.headers) {
+      nodeReqOpt.headers = opt.headers;
     }
 
-    if (urlObject?.protocol === 'https:') {
+    if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
       if (!this.#forcedClient) {
         this.#client = SecureRequest
       }
 
-      opt.hostname = urlObject.hostname;
+      nodeReqOpt.hostname = urlAPI.hostname;
     } else {
-      opt.host = urlObject.host;
+      nodeReqOpt.host = urlAPI.host;
     }
 
     return new Promise((resolve, reject) => {
-      const req = this.#client(opt, (res) => {
+      const req = this.#client(nodeReqOpt, (res) => {
         const dataCollection: Uint8Array[] = []
         res.on('data', (data: Uint8Array) => {
           dataCollection.push(data)
@@ -88,13 +89,13 @@ export default class CarbonHTTP {
           resolve(
             this.response(
               dataCollection,
-              res?.statusCode || HttpStatusCode.OK
+              res.statusCode || HttpStatusCode.OK
             ),
           )
         })
       })
 
-      req.write(context?.body || '')
+      req.write(opt?.body || '')
 
       req.end()
     })

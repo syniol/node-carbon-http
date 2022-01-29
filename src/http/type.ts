@@ -36,6 +36,11 @@ export enum HttpMethod {
   TRACE = 'TRACE',
 }
 
+export enum HttpProtocol {
+  SecureHTTP = 'https:',
+  InSecureHTTP = 'http:',
+}
+
 export interface CarbonHttpRequestOption {
   headers?: Record<string, string>
   method?: HttpMethod

@@ -3,6 +3,6 @@ export default class CarbonHTTP {
     #private;
     constructor(client?: NodeRequestClient);
     private response;
-    request(url: string, context?: CarbonHttpRequestOption): Promise<CarbonHttpResponse>;
+    request(url: Readonly<string>, opt?: CarbonHttpRequestOption): Promise<Readonly<CarbonHttpResponse>>;
 }
 //# sourceMappingURL=carbon.d.ts.map

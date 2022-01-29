@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpMethod = void 0;
+exports.HttpProtocol = exports.HttpMethod = void 0;
 var HttpMethod;
 (function (HttpMethod) {
     HttpMethod["GET"] = "GET";
@@ -13,4 +13,9 @@ var HttpMethod;
     HttpMethod["OPTIONS"] = "OPTIONS";
     HttpMethod["TRACE"] = "TRACE";
 })(HttpMethod = exports.HttpMethod || (exports.HttpMethod = {}));
+var HttpProtocol;
+(function (HttpProtocol) {
+    HttpProtocol["SecureHTTP"] = "https:";
+    HttpProtocol["InSecureHTTP"] = "http:";
+})(HttpProtocol = exports.HttpProtocol || (exports.HttpProtocol = {}));
 //# sourceMappingURL=type.js.map
