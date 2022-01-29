@@ -8,89 +8,107 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _CarbonHTTP_forcedClient, _CarbonHTTP_client;
 Object.defineProperty(exports, "__esModule", { value: true });
-const url_1 = require("url");
-const util_1 = require("util");
-const http_1 = require("http");
-const https_1 = require("https");
-const http_2 = require("./http");
-class CarbonHTTP {
-    constructor(client) {
-        _CarbonHTTP_forcedClient.set(this, void 0);
-        _CarbonHTTP_client.set(this, void 0);
-        __classPrivateFieldSet(this, _CarbonHTTP_forcedClient, false, "f");
-        __classPrivateFieldSet(this, _CarbonHTTP_client, http_1.request, "f");
+exports.CarbonHTTP = void 0;
+var url_1 = require("url");
+var util_1 = require("util");
+var http_1 = require("http");
+var https_1 = require("https");
+var http_2 = require("./http");
+var CarbonHTTP = /** @class */ (function () {
+    function CarbonHTTP(client) {
+        this.forcedClient = false;
+        this.client = http_1.request;
         if (client) {
-            __classPrivateFieldSet(this, _CarbonHTTP_client, client, "f");
-            __classPrivateFieldSet(this, _CarbonHTTP_forcedClient, true, "f");
+            this.client = client;
+            this.forcedClient = true;
         }
     }
-    response(dataBlocks, status) {
-        const result = Buffer
+    CarbonHTTP.prototype.response = function (dataBlocks, status) {
+        var result = Buffer
             .concat(dataBlocks)
             .toString();
         return {
             status: status,
-            json() {
+            json: function () {
                 return JSON.parse(result);
             },
-            text() {
+            text: function () {
                 return result;
             },
         };
-    }
-    request(url, opt) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const urlAPI = new url_1.URL(url);
-            const nodeReqOpt = {
-                method: (opt === null || opt === void 0 ? void 0 : opt.method) || http_2.HttpMethod.GET,
-                path: `${urlAPI.pathname}${urlAPI.search || ''}`,
-                body: new util_1.TextEncoder().encode(opt === null || opt === void 0 ? void 0 : opt.body),
-                port: (opt === null || opt === void 0 ? void 0 : opt.port) ? opt.port : urlAPI.port,
-            };
-            if (opt === null || opt === void 0 ? void 0 : opt.headers) {
-                nodeReqOpt.headers = opt.headers;
-            }
-            if (urlAPI.protocol === http_2.HttpProtocol.SecureHTTP) {
-                if (!__classPrivateFieldGet(this, _CarbonHTTP_forcedClient, "f")) {
-                    __classPrivateFieldSet(this, _CarbonHTTP_client, https_1.request, "f");
+    };
+    CarbonHTTP.prototype.request = function (url, opt) {
+        return __awaiter(this, void 0, void 0, function () {
+            var urlAPI, nodeReqOpt;
+            var _this = this;
+            return __generator(this, function (_a) {
+                urlAPI = new url_1.URL(url);
+                nodeReqOpt = {
+                    method: (opt === null || opt === void 0 ? void 0 : opt.method) || http_2.HttpMethod.GET,
+                    path: "" + urlAPI.pathname + (urlAPI.search || ''),
+                    body: new util_1.TextEncoder().encode(opt === null || opt === void 0 ? void 0 : opt.body),
+                    port: (opt === null || opt === void 0 ? void 0 : opt.port) ? opt.port : urlAPI.port,
+                };
+                if (opt === null || opt === void 0 ? void 0 : opt.headers) {
+                    nodeReqOpt.headers = opt.headers;
                 }
-                nodeReqOpt.hostname = urlAPI.hostname;
-            }
-            else {
-                nodeReqOpt.host = urlAPI.host;
-            }
-            return new Promise((resolve, reject) => {
-                const req = __classPrivateFieldGet(this, _CarbonHTTP_client, "f").call(this, nodeReqOpt, (res) => {
-                    const dataCollection = [];
-                    res.on('data', (data) => {
-                        dataCollection.push(data);
-                    });
-                    res.on('error', (err) => {
-                        reject(err);
-                    });
-                    res.on('end', () => {
-                        resolve(this.response(dataCollection, res.statusCode || http_2.HttpStatusCode.OK));
-                    });
-                });
-                req.write((opt === null || opt === void 0 ? void 0 : opt.body) || '');
-                req.end();
+                if (urlAPI.protocol === http_2.HttpProtocol.SecureHTTP) {
+                    if (!this.forcedClient) {
+                        this.client = https_1.request;
+                    }
+                    nodeReqOpt.hostname = urlAPI.hostname;
+                }
+                else {
+                    nodeReqOpt.host = urlAPI.host;
+                }
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        var req = _this.client(nodeReqOpt, function (res) {
+                            var dataCollection = [];
+                            res.on('data', function (data) {
+                                dataCollection.push(data);
+                            });
+                            res.on('error', function (err) {
+                                reject(err);
+                            });
+                            res.on('end', function () {
+                                resolve(_this.response(dataCollection, res.statusCode || http_2.HttpStatusCode.OK));
+                            });
+                        });
+                        req.write((opt === null || opt === void 0 ? void 0 : opt.body) || '');
+                        req.end();
+                    })];
             });
         });
-    }
-}
-exports.default = CarbonHTTP;
-_CarbonHTTP_forcedClient = new WeakMap(), _CarbonHTTP_client = new WeakMap();
+    };
+    return CarbonHTTP;
+}());
+exports.CarbonHTTP = CarbonHTTP;
 //# sourceMappingURL=carbon.js.map

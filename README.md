@@ -18,11 +18,20 @@ Answer is very easy to use. You can find few examples below for most commonly
 used Methods: `GET` and `POST`.
 
 
+#### Module Import
+_ES5:_
+
+    const Request = require('carbon-http');
+
+_ES6+_
+
+    import { Request } from 'carbon-http'
+
+
 #### GET Request Example
 
 ```javascript
-  const client = new CarbonHTTP();
-const resp = await client.request('https://api.syniol.com/v2/user/hadi/history');
+const resp = await Request('https://api.syniol.com/v2/user/hadi/history');
 
 console.log(resp.json())
 
@@ -37,8 +46,7 @@ console.log(resp.json())
 #### POST Request Example
 
 ```javascript
-  const client = new CarbonHTTP();
-const resp = await client.request(
+const resp = await Request(
   'https://api.syniol.com/v2/user',
   {
     method: 'POST',
@@ -64,15 +72,13 @@ You could also test your endpoints with Mock API given in this library
 and accessible by `CarbonHTTPMock` for your unit tests.
 
 ```javascript
-  const carbonHTTPMock = new CarbonHTTPMock(JSON.stringify(
+const carbonHTTPMock = CarbonClientMock(JSON.stringify(
     { 
       status: 'success' 
     }
   ), 200);
 
-const client = new CarbonHTTP(carbonHTTPMock.client);
-
-const resp = await client.request('https://api.syniol.com/v2/user');
+const resp = await Request('https://api.syniol.com/v2/user');
 
 console.log(resp.json())
 
@@ -83,5 +89,5 @@ console.log(resp.json())
 ```
 
 
-##### Credits
+### Credits
 Copyright &copy; 2022 Syniol Limited. All rights reserved.

@@ -15,89 +15,80 @@ import {
 } from './http'
 
 
-export default class CarbonHTTP {
-  readonly #forcedClient: boolean;
-  #client: NodeRequestClient
+function response(
+  dataBlocks: Uint8Array[],
+  status: Readonly<number>
+): Readonly<CarbonHttpResponse> {
+  const result: Readonly<string> = Buffer
+    .concat(dataBlocks)
+    .toString()
 
-  public constructor(client?: NodeRequestClient) {
-    this.#forcedClient = false;
-    this.#client = InSecureRequest
+  return {
+    status: status,
+    json(): any {
+      return JSON.parse(result)
+    },
+    text(): string {
+      return result
+    },
+  }
+}
 
-    if (client) {
-      this.#client = client
-      this.#forcedClient = true;
-    }
+export function Request(
+  url: Readonly<string>,
+  opt?: CarbonHttpRequestOption,
+  clientService?: NodeRequestClient | any,
+): Promise<Readonly<CarbonHttpResponse>> {
+  const urlAPI = new URL(url)
+  const nodeReqOpt: NodeRequestOption = {
+    method: opt?.method || HttpMethod.GET,
+    path: `${urlAPI.pathname}${urlAPI.search || ''}`,
+    body: new TextEncoder().encode(opt?.body),
+    port: opt?.port ? opt.port : urlAPI.port,
   }
 
-  private response(
-    dataBlocks: Uint8Array[],
-    status: Readonly<number>
-  ): Readonly<CarbonHttpResponse> {
-    const result: Readonly<string> = Buffer
-      .concat(dataBlocks)
-      .toString()
-
-    return {
-      status: status,
-      json(): any {
-        return JSON.parse(result)
-      },
-      text(): string {
-        return result
-      },
-    }
+  if (opt?.headers) {
+    nodeReqOpt.headers = opt.headers;
   }
 
-  public async request(
-    url: Readonly<string>,
-    opt?: CarbonHttpRequestOption,
-  ): Promise<Readonly<CarbonHttpResponse>> {
-    const urlAPI = new URL(url)
-    const nodeReqOpt: NodeRequestOption = {
-      method: opt?.method || HttpMethod.GET,
-      path: `${urlAPI.pathname}${urlAPI.search || ''}`,
-      body: new TextEncoder().encode(opt?.body),
-      port: opt?.port ? opt.port : urlAPI.port,
+  let client = InSecureRequest;
+  if (clientService) {
+    client = clientService;
+  }
+
+  if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
+    if (!clientService) {
+      client = SecureRequest
     }
 
-    if (opt?.headers) {
-      nodeReqOpt.headers = opt.headers;
-    }
+    nodeReqOpt.hostname = urlAPI.hostname;
+  } else {
+    nodeReqOpt.host = urlAPI.host;
+  }
 
-    if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
-      if (!this.#forcedClient) {
-        this.#client = SecureRequest
-      }
-
-      nodeReqOpt.hostname = urlAPI.hostname;
-    } else {
-      nodeReqOpt.host = urlAPI.host;
-    }
-
-    return new Promise((resolve, reject) => {
-      const req = this.#client(nodeReqOpt, (res) => {
-        const dataCollection: Uint8Array[] = []
-        res.on('data', (data: Uint8Array) => {
-          dataCollection.push(data)
-        })
-
-        res.on('error', (err: any) => {
-          reject(err)
-        })
-
-        res.on('end', () => {
-          resolve(
-            this.response(
-              dataCollection,
-              res.statusCode || HttpStatusCode.OK
-            ),
-          )
-        })
+  return new Promise((resolve, reject) => {
+    const req = client(nodeReqOpt, (res) => {
+      const dataCollection: Uint8Array[] = []
+      res.on('data', (data: Uint8Array) => {
+        dataCollection.push(data)
       })
 
-      req.write(opt?.body || '')
+      res.on('error', (err: any) => {
+        reject(err)
+      })
 
-      req.end()
+      res.on('end', () => {
+        resolve(
+          response(
+            dataCollection,
+            res.statusCode || HttpStatusCode.OK
+          ),
+        )
+      })
     })
-  }
+
+    req.write(opt?.body || '')
+
+    req.end()
+  })
 }

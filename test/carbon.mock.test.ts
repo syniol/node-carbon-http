@@ -1,24 +1,23 @@
-import CarbonHTTP from '../src/carbon'
-import CarbonHTTPMock from '../src/carbon.mock'
-import { HttpStatusCode } from '../src/http'
+import { Request, CarbonClientMock, HttpStatusCode } from '../src'
+
 
 describe('Request Unit Test', () => {
-  let sut: CarbonHTTP
+  const sut = Request
 
   describe('given successful response been received through https', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new CarbonHTTP(
-        new CarbonHTTPMock(
+      actual = await sut(
+        'https://api.syniol.com/v2/users/hadi',
+        undefined,
+        CarbonClientMock(
           JSON.stringify({
             username: 'hadi',
             lastLoginDate: '2021-09-12',
           }),
-        ).client,
+        ),
       )
-
-      actual = await sut.request('https://api.syniol.com/v2/users/hadi')
     })
 
     it('should have status of OK `200`', () => {
@@ -37,16 +36,16 @@ describe('Request Unit Test', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new CarbonHTTP(
-        new CarbonHTTPMock(
+      actual = await sut(
+        'http://api.syniol.com/v2/users/hadi',
+        undefined,
+        CarbonClientMock(
           JSON.stringify({
             username: 'hadi',
             lastLoginDate: '2021-09-12',
           }),
-        ).client,
+        ),
       )
-
-      actual = await sut.request('http://api.syniol.com/v2/users/hadi')
     })
 
     it('should have status of OK `200`', () => {
@@ -62,39 +61,33 @@ describe('Request Unit Test', () => {
   })
 
   describe('given successful response been received through non-specified http(s) protocol', () => {
-    beforeAll(() => {
-      sut = new CarbonHTTP(
-        new CarbonHTTPMock(
+    it('should throw an error for an invalid URL',  async () => {
+      try {
+        await sut('api.syniol.com/v2/users/hadi', undefined, CarbonClientMock(
           JSON.stringify({
             username: 'hadi',
             lastLoginDate: '2021-09-12',
           }),
-        ).client,
-      )
-    })
-
-    it('should throw an error for an invalid URL',  () => {
-      expect(() => sut.request('api.syniol.com/v2/users/hadi'))
-        .rejects
-        .toThrowError('Invalid URL: api.syniol.com/v2/users/hadi');
+        ))
+      } catch (e: any) {
+        expect(e.message).toEqual('Invalid URL: api.syniol.com/v2/users/hadi')
+      }
     })
   })
+
 
   describe('given unsuccessful response been received', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new CarbonHTTP(
-        new CarbonHTTPMock('{}', HttpStatusCode.FORBIDDEN).client,
-      )
-
-      actual = await sut.request(
+      actual = await sut(
         'http://api.syniol.com/v2/users/hadi',
         {
           headers: {
             'Content-Type': 'application/json',
           }
-        }
+        },
+        CarbonClientMock('{}', HttpStatusCode.FORBIDDEN),
       )
     })
 
@@ -111,17 +104,14 @@ describe('Request Unit Test', () => {
     let actual: any = undefined
 
     beforeAll(async () => {
-      sut = new CarbonHTTP(
-        new CarbonHTTPMock('').client,
-      )
-
-      actual = await sut.request(
+      actual = await sut(
         'http://api.syniol.com/v2/users/hadi',
         {
           headers: {
             'Content-Type': 'application/json',
           }
-        }
+        },
+        CarbonClientMock(''),
       )
     })
 
@@ -131,13 +121,13 @@ describe('Request Unit Test', () => {
   })
 
   describe('given error been thrown during request', () => {
-    beforeAll(async () => {
-      sut = new CarbonHTTP(new CarbonHTTPMock(new Error('Unexpected')).client)
-    })
-
     it('should throw an error', () => {
       expect(() =>
-        sut.request('http://api.syniol.com/v2/users/hadi'),
+        sut(
+          'http://api.syniol.com/v2/users/hadi',
+          undefined,
+          CarbonClientMock(new Error('Unexpected'))
+        ),
       ).rejects.toThrow('Unexpected')
     })
   })

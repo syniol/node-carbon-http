@@ -1,5 +1,5 @@
 import { HttpStatusCode, NodeRequestClient } from './http';
-export default class CarbonHTTPMock {
+export declare class CarbonHTTPMock {
     readonly client: NodeRequestClient;
     constructor(arg: string | Error, statusCode?: HttpStatusCode);
 }

@@ -1,6 +1,7 @@
 import { NodeRequestClient, CarbonHttpRequestOption, CarbonHttpResponse } from './http';
-export default class CarbonHTTP {
-    #private;
+export declare class CarbonHTTP {
+    private readonly forcedClient;
+    private client;
     constructor(client?: NodeRequestClient);
     private response;
     request(url: Readonly<string>, opt?: CarbonHttpRequestOption): Promise<Readonly<CarbonHttpResponse>>;

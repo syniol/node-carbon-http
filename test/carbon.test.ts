@@ -1,33 +1,34 @@
-import CarbonHTTP from '../src/carbon'
-import { CarbonHttpResponse } from '../src/http'
+import { Request, CarbonHttpResponse } from '../src'
+
 
 describe('Request Test', () => {
-  let sut: CarbonHTTP
-
-  beforeAll(() => {
-    sut = new CarbonHTTP()
-  })
-
-  it('should be instantiable', () => {
-    expect(sut).toBeInstanceOf(CarbonHTTP)
-  })
+  const sut = Request
 
   describe('given GET request is made', () => {
     let actual: CarbonHttpResponse;
 
     beforeAll(async () => {
-      actual = await sut.request('https://api.genderize.io/?name=hadi')
+      actual = await sut(
+        'https://api.github.com/users/syniol',
+        {
+          headers: {
+            'User-Agent': 'PostmanRuntime/7.26.5',
+            'Accept': 'application/json',
+          }
+        }
+      )
     })
 
     it('should bring a response back in JSON format', () => {
       expect(actual.json()).toMatchSnapshot({
-        probability: expect.any(Number),
-        count: expect.any(Number),
+        node_id: expect.any(String),
+        created_at: expect.any(String),
+        updated_at: expect.any(String),
       })
     })
 
     it('should bring a response back in String format', () => {
-      expect(actual.text()).toContain('"name":"hadi","gender":"male"')
+      expect(actual.text()).toContain('"login":"syniol"')
     })
   })
 })
