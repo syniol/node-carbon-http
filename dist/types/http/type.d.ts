@@ -34,9 +34,9 @@ export interface CarbonHttpRequestOption {
     body?: string;
     port?: number;
 }
-export interface CarbonHttpResponse {
+export interface CarbonHttpResponse<T> {
     status: HttpStatusCode;
     text(): string;
-    json(): any;
+    json(): T;
 }
 //# sourceMappingURL=type.d.ts.map

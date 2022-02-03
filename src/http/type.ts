@@ -48,9 +48,9 @@ export interface CarbonHttpRequestOption {
   port?: number
 }
 
-export interface CarbonHttpResponse {
+export interface CarbonHttpResponse<T> {
   status: HttpStatusCode
 
   text(): string
-  json(): any
+  json(): T
 }

@@ -1,40 +1,42 @@
 # Carbon HTTP
 Carbon HTTP is simplified http(s) library exclusively for Node.js; 
 written in TypeScript and transpiled to JavaScript. It would be a 
-great replacement for libraries such as: node-fetch, axios, end etc.
+great replacement for libraries such as: node-fetch, request-promise, 
+end etc.
 
 
 ## Motivation
 There are few libraries for a same purpose but most are implemented 
 for both Browser API and Node runtime. Given exising libraries try to 
-meet the needs both for Browser API and Node; it, cause many complications 
-for enterprise level applications. For example:  writing unit test could 
-be extremely frustrating and might require a third-party test library due 
-to poor engineering of original library itself.
+meet the needs both Browser and Node API; it could cause many complications 
+for enterprise level applications. For example: forced upgrade due to 
+security vulnerability of many dependency of library itself. On the 
+other hand, __Carbon HTTP__ has no third-party dependency and been 
+developed and maintained in Great Britain by a Limited Company.
 
-You could also have to upgrade your library due to security vulnerability of many 
-dependency of library itself. On the other hand, __Carbon HTTP__ has no third-party 
-dependency and been developed and maintained in Great Britain.
+Furthermore, writing unit test could be extremely frustrating and might 
+require a third-party test library due to poor engineering of original 
+library itself.
 
 
 ## How to use
-Answer is very easy to use. You can find few examples below for most commonly 
-used Methods: `GET` and `POST`.
+Answer is very easy to use. You can find a few examples below for 
+most commonly used Methods: `GET` and `POST`.
 
 
 ### Module Import
-_ES5:_
+_ES5_
 
     const { Request } = require('carbon-http');
 
-_ES6+_
+_ES6+ & TypeScript_
 
     import { Request } from 'carbon-http'
 
 
 ### GET Request Example
 
-```javascript
+```
 const resp = await Request('https://api.syniol.com/v2/user/hadi/history');
 
 console.log(resp.json())
@@ -49,7 +51,7 @@ console.log(resp.json())
 
 ### POST Request Example
 
-```javascript
+```
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   {
@@ -75,7 +77,7 @@ console.log(resp.json())
 You could also test your endpoints with Mock API given in this library
 and accessible by `CarbonClientMock` for your unit tests.
 
-```javascript
+```
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   undefined,

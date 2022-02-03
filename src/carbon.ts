@@ -13,20 +13,29 @@ import {
   HttpMethod,
   HttpProtocol,
 } from './http'
+import { NewCarbonError } from './error'
 
 
-function response(
+function response<T>(
   dataBlocks: Uint8Array[],
   status: Readonly<number>
-): Readonly<CarbonHttpResponse> {
+): Readonly<CarbonHttpResponse<T>> {
   const result: Readonly<string> = Buffer
     .concat(dataBlocks)
     .toString()
 
   return {
     status: status,
-    json(): any {
-      return JSON.parse(result)
+    json(): T {
+      try {
+        return JSON.parse(result)
+      } catch (_) {
+        throw NewCarbonError(
+          'error parsing response as a valid JSON object',
+          `actual response: ${this.text()}`,
+          status,
+        )
+      }
     },
     text(): string {
       return result
@@ -34,11 +43,11 @@ function response(
   }
 }
 
-export function Request(
+export function Request<T>(
   url: Readonly<string>,
   opt?: CarbonHttpRequestOption,
   clientService?: NodeRequestClient | any,
-): Promise<Readonly<CarbonHttpResponse>> {
+): Promise<Readonly<CarbonHttpResponse<T>>> {
   const urlAPI = new URL(url)
   const nodeReqOpt: NodeRequestOption = {
     method: opt?.method || HttpMethod.GET,

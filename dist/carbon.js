@@ -6,6 +6,7 @@ var util_1 = require("util");
 var http_1 = require("http");
 var https_1 = require("https");
 var http_2 = require("./http");
+var error_1 = require("./error");
 function response(dataBlocks, status) {
     var result = Buffer
         .concat(dataBlocks)
@@ -13,7 +14,12 @@ function response(dataBlocks, status) {
     return {
         status: status,
         json: function () {
-            return JSON.parse(result);
+            try {
+                return JSON.parse(result);
+            }
+            catch (_) {
+                throw (0, error_1.NewCarbonError)('error parsing response as a valid JSON object', "actual response: " + this.text(), status);
+            }
         },
         text: function () {
             return result;
