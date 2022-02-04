@@ -50,6 +50,7 @@ export interface CarbonHttpRequestOption {
 
 export interface CarbonHttpResponse<T> {
   status: HttpStatusCode
+  headers: NodeJS.Dict<string | string[]>
 
   text(): string
   json(): T

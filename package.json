@@ -1,16 +1,17 @@
 {
   "name": "carbon-http",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Node.js Lightest HTTP(s) request wrapper",
   "keywords": [
+    "node",
+    "fetch",
     "http",
     "https",
     "request",
-    "node",
     "typescript",
-    "es5",
+    "esnext",
     "es6",
-    "esnext"
+    "es5"
   ],
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",

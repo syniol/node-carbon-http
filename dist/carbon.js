@@ -7,12 +7,13 @@ var http_1 = require("http");
 var https_1 = require("https");
 var http_2 = require("./http");
 var error_1 = require("./error");
-function response(dataBlocks, status) {
+function response(dataBlocks, status, headers) {
     var result = Buffer
         .concat(dataBlocks)
         .toString();
     return {
         status: status,
+        headers: headers,
         json: function () {
             try {
                 return JSON.parse(result);
@@ -60,7 +61,7 @@ function Request(url, opt, clientService) {
                 reject(err);
             });
             res.on('end', function () {
-                resolve(response(dataCollection, res.statusCode || http_2.HttpStatusCode.OK));
+                resolve(response(dataCollection, res.statusCode || http_2.HttpStatusCode.OK, res.headers));
             });
         });
         req.write((opt === null || opt === void 0 ? void 0 : opt.body) || '');

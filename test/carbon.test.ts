@@ -30,5 +30,11 @@ describe('Request Test', () => {
     it('should bring a response back in String format', () => {
       expect(actual.text()).toContain('"login":"syniol"')
     })
+
+    it('should bring a response back in String format', () => {
+      expect(actual.headers).toMatchObject(expect.objectContaining({
+        'content-length': expect.any(String),
+      }))
+    })
   })
 })

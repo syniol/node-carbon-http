@@ -18,7 +18,8 @@ import { NewCarbonError } from './error'
 
 function response<T>(
   dataBlocks: Uint8Array[],
-  status: Readonly<number>
+  status: Readonly<number>,
+  headers: NodeJS.Dict<string | string[]>,
 ): Readonly<CarbonHttpResponse<T>> {
   const result: Readonly<string> = Buffer
     .concat(dataBlocks)
@@ -26,6 +27,7 @@ function response<T>(
 
   return {
     status: status,
+    headers: headers,
     json(): T {
       try {
         return JSON.parse(result)
@@ -90,7 +92,8 @@ export function Request<T>(
         resolve(
           response(
             dataCollection,
-            res.statusCode || HttpStatusCode.OK
+            res.statusCode || HttpStatusCode.OK,
+            res.headers,
           ),
         )
       })

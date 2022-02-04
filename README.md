@@ -20,23 +20,26 @@ library itself.
 
 
 ## How to use
-Answer is very easy to use. You can find a few examples below for 
-most commonly used Methods: `GET` and `POST`.
+Simple Answer is it's very easy to use. You can find a few examples below 
+for most commonly used Methods: `GET` and `POST`.
 
 
 ### Module Import
 _ES5_
-
-    const { Request } = require('carbon-http');
+```js
+const { Request } = require('carbon-http')
+```
 
 _ES6+ & TypeScript_
-
-    import { Request } from 'carbon-http'
-
+```js
+import { Request } from 'carbon-http'
+```
 
 ### GET Request Example
 
-```
+```js
+import { Request } from 'carbon-http';
+
 const resp = await Request('https://api.syniol.com/v2/user/hadi/history');
 
 console.log(resp.json())
@@ -51,7 +54,9 @@ console.log(resp.json())
 
 ### POST Request Example
 
-```
+```js
+import { Request } from 'carbon-http';
+
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   {
@@ -73,11 +78,38 @@ console.log(resp.json())
 ```
 
 
+### TypeScript DELETE Example _<sup>(With HttpStatusCode Type)</sup>_
+```js
+import { Request, HttpStatusCode } from 'carbon-http';
+
+const resp = await Request(
+  'https://api.syniol.com/v2/user/hadi/history/73',
+  {
+    method: HttpStatusCode.DELETE,
+  }
+);
+```
+
+
+### Response
+Response from Promise Request, has the following APIs available:
+
+```js
+status    // example 200
+headers,  // example { "accept-ranges": "bytes", "... }
+text()    // example '<html><header>....</html>'
+json()    // example { status: "Success" }
+```
+
+
 ### Unit Tests and Mocking Example
 You could also test your endpoints with Mock API given in this library
 and accessible by `CarbonClientMock` for your unit tests.
 
-```
+__JavaScript Mocking Library Example__
+```js
+import { Request, CarbonClientMock } from 'carbon-http'
+
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   undefined,
@@ -86,6 +118,34 @@ const resp = await Request(
       status: 'success'
     }
   ), 200),
+);
+
+console.log(resp.json())
+
+// prints
+{
+  status: 'success'
+}
+```
+
+__TypeScript Mocking Library Example__
+```js
+import {
+  Request,
+  HttpStatusCode,
+  CarbonClientMock
+} from 'carbon-http'
+
+const resp = await Request(
+  'https://api.syniol.com/v2/user',
+  undefined,
+  CarbonClientMock(JSON.stringify(
+    {
+      status: 'success'
+    }
+  ),
+    HttpStatusCode.OK
+  ),
 );
 
 console.log(resp.json())
