@@ -21,7 +21,8 @@ library itself.
 
 ## How to use
 Simple Answer is it's very easy to use. You can find a few examples below 
-for most commonly used Methods: `GET` and `POST`.
+for most commonly used Methods: `GET`, `POST` in JavaScript and `DELETE` 
+in TypeScript below.
 
 
 ### Module Import
@@ -96,7 +97,7 @@ Response from Promise Request, has the following APIs available:
 
 ```js
 status    // example 200
-headers,  // example { "accept-ranges": "bytes", "... }
+headers   // example { "accept-ranges": "bytes", "... }
 text()    // example '<html><header>....</html>'
 json()    // example { status: "Success" }
 ```
