@@ -1,4 +1,6 @@
 # Carbon HTTP
+![workflow](https://github.com/syniol/node-carbon-http/actions/workflows/makefile.yml/badge.svg)
+
 Carbon HTTP is simplified http(s) library exclusively for Node.js; 
 written in TypeScript and transpiled to JavaScript. It would be a 
 great replacement for libraries such as: node-fetch, request-promise, 
@@ -19,6 +21,20 @@ require a third-party test library due to poor engineering of original
 library itself.
 
 
+## Quick Start
+First you need to install the Carbon HTTP Library for node.js ecosystem via npm or yarn package management.
+
+__NPM__:
+```shell
+npm i carbon-http
+```
+
+__YARN__:
+```shell
+yarn add carbon-http
+```
+
+
 ## How to use
 Simple Answer is it's very easy to use. You can find a few examples below 
 for most commonly used Methods: `GET`, `POST` in JavaScript and `DELETE` 
@@ -36,7 +52,8 @@ _ES6+ & TypeScript_
 import { Request } from 'carbon-http'
 ```
 
-### GET Request Example
+
+### Request Example _<sup>(GET)</sup>_
 
 ```js
 import { Request } from 'carbon-http';
@@ -53,15 +70,16 @@ console.log(resp.json())
 }
 ```
 
-### POST Request Example
+
+### Request Example _<sup>(POST)</sup>_
 
 ```js
-import { Request } from 'carbon-http';
+import { Request, HttpMethod } from 'carbon-http';
 
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   {
-    method: 'POST',
+    method: HttpMethod.POST,
     body: JSON.stringify({
       username: 'myusername',
       email: 'myemail@email.com',
@@ -79,14 +97,14 @@ console.log(resp.json())
 ```
 
 
-### TypeScript DELETE Example _<sup>(With HttpStatusCode Type)</sup>_
+### Request Example _<sup>(DELETE)</sup>_
 ```js
-import { Request, HttpStatusCode } from 'carbon-http';
+import { Request, HttpMethod } from 'carbon-http';
 
 const resp = await Request(
   'https://api.syniol.com/v2/user/hadi/history/73',
   {
-    method: HttpStatusCode.DELETE,
+    method: HttpMethod.DELETE,
   }
 );
 ```
@@ -103,60 +121,5 @@ json()    // example { status: "Success" }
 ```
 
 
-### Unit Tests and Mocking Example
-You could also test your endpoints with Mock API given in this library
-and accessible by `CarbonClientMock` for your unit tests.
-
-__JavaScript Mocking Library Example__
-```js
-import { Request, CarbonClientMock } from 'carbon-http'
-
-const resp = await Request(
-  'https://api.syniol.com/v2/user',
-  undefined,
-  CarbonClientMock(JSON.stringify(
-    {
-      status: 'success'
-    }
-  ), 200),
-);
-
-console.log(resp.json())
-
-// prints
-{
-  status: 'success'
-}
-```
-
-__TypeScript Mocking Library Example__
-```js
-import {
-  Request,
-  HttpStatusCode,
-  CarbonClientMock
-} from 'carbon-http'
-
-const resp = await Request(
-  'https://api.syniol.com/v2/user',
-  undefined,
-  CarbonClientMock(JSON.stringify(
-    {
-      status: 'success'
-    }
-  ),
-    HttpStatusCode.OK
-  ),
-);
-
-console.log(resp.json())
-
-// prints
-{
-  status: 'success'
-}
-```
-
-
 ### Credits
-Copyright &copy; 2022 Syniol Limited. All rights reserved.
+Copyright &copy; 2022-2025 Syniol Limited. All rights reserved.

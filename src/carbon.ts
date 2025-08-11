@@ -1,11 +1,9 @@
-
-import { URL } from 'url'
-import { TextEncoder } from 'util'
-import { request as InSecureRequest } from 'http'
-import { request as SecureRequest } from 'https'
+import { URL } from 'node:url'
+import { TextEncoder } from 'node:util'
+import { request as InSecureRequest } from 'node:http'
+import { request as SecureRequest } from 'node:https'
 
 import {
-  NodeRequestClient,
   NodeRequestOption,
   CarbonHttpRequestOption,
   CarbonHttpResponse,
@@ -13,42 +11,10 @@ import {
   HttpMethod,
   HttpProtocol,
 } from './http'
-import { NewCarbonError } from './error'
-
-
-function response<T>(
-  dataBlocks: Uint8Array[],
-  status: Readonly<number>,
-  headers: NodeJS.Dict<string | string[]>,
-): Readonly<CarbonHttpResponse<T>> {
-  const result: Readonly<string> = Buffer
-    .concat(dataBlocks)
-    .toString()
-
-  return {
-    status: status,
-    headers: headers,
-    json(): T {
-      try {
-        return JSON.parse(result)
-      } catch (_) {
-        throw NewCarbonError(
-          'error parsing response as a valid JSON object',
-          `actual response: ${this.text()}`,
-          status,
-        )
-      }
-    },
-    text(): string {
-      return result
-    },
-  }
-}
 
 export function Request<T>(
   url: Readonly<string>,
   opt?: CarbonHttpRequestOption,
-  clientService?: NodeRequestClient | any,
 ): Promise<Readonly<CarbonHttpResponse<T>>> {
   const urlAPI = new URL(url)
   const nodeReqOpt: NodeRequestOption = {
@@ -63,14 +29,8 @@ export function Request<T>(
   }
 
   let client = InSecureRequest;
-  if (clientService) {
-    client = clientService;
-  }
-
   if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
-    if (!clientService) {
-      client = SecureRequest
-    }
+    client = SecureRequest
 
     nodeReqOpt.hostname = urlAPI.hostname;
   } else {
@@ -103,4 +63,25 @@ export function Request<T>(
 
     req.end()
   })
+}
+
+function response<T>(
+  dataBlocks: Uint8Array[],
+  status: Readonly<number>,
+  headers: NodeJS.Dict<string | string[]>,
+): Readonly<CarbonHttpResponse<T>> {
+  const result: Readonly<string> = Buffer
+    .concat(dataBlocks)
+    .toString()
+
+  return {
+    status: status,
+    headers: headers,
+    json(): T {
+      return JSON.parse(result)
+    },
+    text(): string {
+      return result
+    },
+  }
 }

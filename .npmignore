@@ -1,11 +1,17 @@
 # Folders
 src/
 test/
+example/
 coverage/
 .idea/
 
+
 # Files
 .gitignore
+.dockerignore
 .prettierrc
 jest.config.js
 tsconfig.json
+Dockerfile
+CONTRIBUTING.md
+LICENSE

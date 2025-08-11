@@ -1,6 +1,5 @@
 import { Request, CarbonHttpResponse } from '../src'
 
-
 describe('Request Test', () => {
   const sut = Request
 
@@ -24,6 +23,7 @@ describe('Request Test', () => {
         node_id: expect.any(String),
         created_at: expect.any(String),
         updated_at: expect.any(String),
+        public_repos: expect.any(Number),
       })
     })
 

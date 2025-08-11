@@ -1,18 +1,6 @@
-import {
-  ClientRequest,
-  IncomingMessage as InSecureIncomingMessage,
-  RequestOptions as InSecureRequestOpt,
-} from 'http'
-import { RequestOptions as SecureRequestOpt } from 'https'
-import { URL } from 'url'
+import { ClientRequestArgs } from 'node:http';
 
 import { HttpStatusCode } from './codes'
-
-
-export type NodeRequestClient = (
-  options: InSecureRequestOpt | SecureRequestOpt | string | URL,
-  callback?: (res: InSecureIncomingMessage) => void,
-) => ClientRequest
 
 export interface NodeRequestOption {
   path?: string
@@ -41,7 +29,7 @@ export enum HttpProtocol {
   InSecureHTTP = 'http:',
 }
 
-export interface CarbonHttpRequestOption {
+export interface CarbonHttpRequestOption extends ClientRequestArgs {
   headers?: Record<string, string>
   method?: HttpMethod
   body?: string

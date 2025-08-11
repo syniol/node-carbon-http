@@ -1,7 +1,7 @@
 {
   "name": "carbon-http",
-  "version": "1.0.3",
-  "description": "Node.js Lightest HTTP(s) request wrapper",
+  "version": "2.0.0",
+  "description": "Node.js Ultrasonic HTTP(s) request wrapper with no dependency",
   "keywords": [
     "node",
     "fetch",
@@ -15,17 +15,21 @@
   ],
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "repository": "https://github.com/syniol/node-carbon-http",
-  "author": "Hadi Tajallaei <hadi@syniol.com>",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syniol/node-carbon-http.git"
+  },
   "private": false,
+  "author": "Hadi Tajallaei <hadi@syniol.com>",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
+    "start": "cd example; npm i; npm start;cd ..;",
     "test": "jest",
-    "prepare": "jest && rm -rf ./dist && tsc"
+    "prepublish": "rm -rf ./dist && tsc"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.5.2",
     "@types/node": "^16.11.6",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",

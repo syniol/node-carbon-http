@@ -1,3 +1,2 @@
-export * from './carbon'
-export * from './carbon.mock'
 export * from './http'
+export * from './carbon'
