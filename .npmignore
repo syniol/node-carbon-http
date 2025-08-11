@@ -3,6 +3,7 @@ src/
 test/
 example/
 coverage/
+.github/
 .idea/
 
 

@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "carbon-http": "^2.0.1",
-    "carbon-http-local": "../dist"
+    "carbon-http-local": "../dist",
+    "prettier": "^3.6.2"
   }
 }
