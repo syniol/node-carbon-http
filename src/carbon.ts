@@ -12,27 +12,6 @@ import {
   HttpProtocol,
 } from './http'
 
-function response<T>(
-  dataBlocks: Uint8Array[],
-  status: Readonly<number>,
-  headers: NodeJS.Dict<string | string[]>,
-): Readonly<CarbonHttpResponse<T>> {
-  const result: Readonly<string> = Buffer
-    .concat(dataBlocks)
-    .toString()
-
-  return {
-    status: status,
-    headers: headers,
-    json(): T {
-      return JSON.parse(result)
-    },
-    text(): string {
-      return result
-    },
-  }
-}
-
 export function Request<T>(
   url: Readonly<string>,
   opt?: CarbonHttpRequestOption,
@@ -84,4 +63,25 @@ export function Request<T>(
 
     req.end()
   })
+}
+
+function response<T>(
+  dataBlocks: Uint8Array[],
+  status: Readonly<number>,
+  headers: NodeJS.Dict<string | string[]>,
+): Readonly<CarbonHttpResponse<T>> {
+  const result: Readonly<string> = Buffer
+    .concat(dataBlocks)
+    .toString()
+
+  return {
+    status: status,
+    headers: headers,
+    json(): T {
+      return JSON.parse(result)
+    },
+    text(): string {
+      return result
+    },
+  }
 }
