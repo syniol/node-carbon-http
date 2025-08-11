@@ -1,4 +1,6 @@
 # Carbon HTTP
+![workflow](https://github.com/syniol/node-carbon-http/actions/workflows/makefile.yml/badge.svg)
+
 Carbon HTTP is simplified http(s) library exclusively for Node.js; 
 written in TypeScript and transpiled to JavaScript. It would be a 
 great replacement for libraries such as: node-fetch, request-promise, 
