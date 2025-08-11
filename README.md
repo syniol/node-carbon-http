@@ -52,7 +52,8 @@ _ES6+ & TypeScript_
 import { Request } from 'carbon-http'
 ```
 
-### GET Request Example
+
+### Request Example _<sup>(GET)</sup>_
 
 ```js
 import { Request } from 'carbon-http';
@@ -69,7 +70,8 @@ console.log(resp.json())
 }
 ```
 
-### POST Request Example
+
+### Request Example _<sup>(POST)</sup>_
 
 ```js
 import { Request, HttpMethod } from 'carbon-http';
@@ -95,7 +97,7 @@ console.log(resp.json())
 ```
 
 
-### TypeScript DELETE Example _<sup>(With HttpStatusCode Type)</sup>_
+### Request Example _<sup>(DELETE)</sup>_
 ```js
 import { Request, HttpMethod } from 'carbon-http';
 
@@ -120,4 +122,4 @@ json()    // example { status: "Success" }
 
 
 ### Credits
-Copyright &copy; 2022-25 Syniol Limited. All rights reserved.
+Copyright &copy; 2022-2025 Syniol Limited. All rights reserved.
