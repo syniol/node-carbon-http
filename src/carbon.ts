@@ -1,15 +1,15 @@
 import { URL } from 'node:url'
 import { TextEncoder } from 'node:util'
-import { request as InSecureRequest } from 'node:http'
+import { IncomingMessage, request as InSecureRequest } from 'node:http'
 import { request as SecureRequest } from 'node:https'
 
 import {
-  NodeRequestOption,
   CarbonHttpRequestOption,
   CarbonHttpResponse,
-  HttpStatusCode,
   HttpMethod,
   HttpProtocol,
+  HttpStatusCode,
+  NodeRequestOption,
 } from './http'
 
 export function Request<T>(
@@ -25,16 +25,16 @@ export function Request<T>(
   }
 
   if (opt?.headers) {
-    nodeReqOpt.headers = opt.headers;
+    nodeReqOpt.headers = opt.headers
   }
 
-  let client = InSecureRequest;
+  let client = InSecureRequest
   if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
     client = SecureRequest
 
-    nodeReqOpt.hostname = urlAPI.hostname;
+    nodeReqOpt.hostname = urlAPI.hostname
   } else {
-    nodeReqOpt.host = urlAPI.host;
+    nodeReqOpt.host = urlAPI.host
   }
 
   return new Promise((resolve, reject) => {
@@ -54,6 +54,7 @@ export function Request<T>(
             dataCollection,
             res.statusCode || HttpStatusCode.OK,
             res.headers,
+            res,
           ),
         )
       })
@@ -69,12 +70,14 @@ function response<T>(
   dataBlocks: Uint8Array[],
   status: Readonly<number>,
   headers: NodeJS.Dict<string | string[]>,
+  incomingMessage: IncomingMessage,
 ): Readonly<CarbonHttpResponse<T>> {
   const result: Readonly<string> = Buffer
     .concat(dataBlocks)
     .toString()
 
   return {
+    incomingMessage,
     status: status,
     headers: headers,
     json(): T {

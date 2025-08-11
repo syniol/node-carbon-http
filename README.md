@@ -114,10 +114,11 @@ const resp = await Request(
 Response from Promise Request, has the following APIs available:
 
 ```js
-status    // example 200
-headers   // example { "accept-ranges": "bytes", "... }
-text()    // example '<html><header>....</html>'
-json()    // example { status: "Success" }
+status            // example 200
+headers           // example { "accept-ranges": "bytes", "... }
+incomingMessage:  // example { "httpVersion": "1.1", "...} 
+text()            // example '<html><header>....</html>'
+json()            // example { status: "Success" }
 ```
 
 
