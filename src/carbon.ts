@@ -1,8 +1,8 @@
 
-import { URL } from 'url'
-import { TextEncoder } from 'util'
-import { request as InSecureRequest } from 'http'
-import { request as SecureRequest } from 'https'
+import { URL } from 'node:url'
+import { TextEncoder } from 'node:util'
+import { request as InSecureRequest } from 'node:http'
+import { request as SecureRequest } from 'node:https'
 
 import {
   NodeRequestClient,
