@@ -12,7 +12,6 @@ import {
   HttpMethod,
   HttpProtocol,
 } from './http'
-import { NewCarbonError } from './error'
 
 
 function response<T>(
@@ -28,16 +27,7 @@ function response<T>(
     status: status,
     headers: headers,
     json(): T {
-      try {
-        return JSON.parse(result)
-      } catch (_) {
-        throw NewCarbonError(
-          'error parsing response as a valid JSON object',
-          'UnexpectedJSONFormatException',
-          `actual response: ${this.text()}`,
-          status,
-        )
-      }
+      return JSON.parse(result)
     },
     text(): string {
       return result
