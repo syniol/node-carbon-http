@@ -24,6 +24,7 @@
   "private": false,
   "scripts": {
     "build": "rm -rf ./dist && tsc",
+    "start": "cd example; npm i; npm start;cd ..;",
     "test": "jest",
     "prepublish": "rm -rf ./dist && tsc"
   },

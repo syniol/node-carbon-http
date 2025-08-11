@@ -5,4 +5,4 @@ RUN mkdir -p /var/local/syniol/carbon-http
 WORKDIR /var/local/syniol/carbon-http/
 COPY . .
 
-RUN npm i && npm test
+RUN npm i && npm test && npm start
