@@ -1,4 +1,3 @@
-
 import { URL } from 'node:url'
 import { TextEncoder } from 'node:util'
 import { request as InSecureRequest } from 'node:http'
@@ -12,7 +11,6 @@ import {
   HttpMethod,
   HttpProtocol,
 } from './http'
-
 
 function response<T>(
   dataBlocks: Uint8Array[],
