@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CarbonClientMock = void 0;
+var node_buffer_1 = require("node:buffer");
 var http_1 = require("./http");
-var buffer_1 = require("buffer");
 function CarbonClientMock(arg, statusCode) {
     return function (_, callback) {
         if (typeof callback === 'function') {
@@ -11,7 +11,7 @@ function CarbonClientMock(arg, statusCode) {
                     switch (e) {
                         case 'data':
                             if (typeof arg === 'string') {
-                                listener(buffer_1.Buffer.from(arg, 'utf8'));
+                                listener(node_buffer_1.Buffer.from(arg, 'utf8'));
                             }
                             break;
                         case 'error':

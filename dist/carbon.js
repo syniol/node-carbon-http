@@ -19,7 +19,7 @@ function response(dataBlocks, status, headers) {
                 return JSON.parse(result);
             }
             catch (_) {
-                throw (0, error_1.NewCarbonError)('error parsing response as a valid JSON object', "actual response: " + this.text(), status);
+                throw (0, error_1.NewCarbonError)('error parsing response as a valid JSON object', "actual response: ".concat(this.text()), status);
             }
         },
         text: function () {
@@ -31,7 +31,7 @@ function Request(url, opt, clientService) {
     var urlAPI = new url_1.URL(url);
     var nodeReqOpt = {
         method: (opt === null || opt === void 0 ? void 0 : opt.method) || http_2.HttpMethod.GET,
-        path: "" + urlAPI.pathname + (urlAPI.search || ''),
+        path: "".concat(urlAPI.pathname).concat(urlAPI.search || ''),
         body: new util_1.TextEncoder().encode(opt === null || opt === void 0 ? void 0 : opt.body),
         port: (opt === null || opt === void 0 ? void 0 : opt.port) ? opt.port : urlAPI.port,
     };

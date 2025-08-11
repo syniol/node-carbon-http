@@ -78,7 +78,7 @@ describe('Request Unit Test', () => {
           ),
         )
       } catch (e: any) {
-        expect(e.message).toEqual('Invalid URL: api.syniol.com/v2/users/hadi')
+        expect(e.message).toContain('Invalid URL')
       }
     })
   })

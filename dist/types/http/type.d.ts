@@ -1,9 +1,12 @@
 /// <reference types="node" />
-import { ClientRequest, IncomingMessage as InSecureIncomingMessage, RequestOptions as InSecureRequestOpt } from 'http';
-import { RequestOptions as SecureRequestOpt } from 'https';
-import { URL } from 'url';
+/// <reference types="node" />
+/// <reference types="node" />
+/// <reference types="node" />
+import { ClientRequest, IncomingMessage as InSecureIncomingMessage, RequestOptions as InSecureRequestOpt } from 'node:http';
+import { RequestOptions as SecureRequestOpt } from 'node:https';
+import { URL } from 'node:url';
 import { HttpStatusCode } from './codes';
-export declare type NodeRequestClient = (options: InSecureRequestOpt | SecureRequestOpt | string | URL, callback?: (res: InSecureIncomingMessage) => void) => ClientRequest;
+export type NodeRequestClient = (options: InSecureRequestOpt | SecureRequestOpt | string | URL, callback?: (res: InSecureIncomingMessage) => void) => ClientRequest;
 export interface NodeRequestOption {
     path?: string;
     hostname?: string;

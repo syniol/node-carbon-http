@@ -2,9 +2,9 @@ import {
   ClientRequest,
   IncomingMessage as InSecureIncomingMessage,
   RequestOptions as InSecureRequestOpt,
-} from 'http'
-import { RequestOptions as SecureRequestOpt } from 'https'
-import { URL } from 'url'
+} from 'node:http'
+import { RequestOptions as SecureRequestOpt } from 'node:https'
+import { URL } from 'node:url'
 
 import { HttpStatusCode } from './codes'
 

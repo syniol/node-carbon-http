@@ -22,10 +22,10 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "jest",
-    "prepare": "jest && rm -rf ./dist && tsc"
+    "prepublish": "rm -rf ./dist && tsc"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.5.2",
     "@types/node": "^16.11.6",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",

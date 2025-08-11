@@ -1,7 +1,6 @@
 # Folders
 src/
 test/
-coverage/
 .idea/
 
 # Files
@@ -9,3 +8,4 @@ coverage/
 .prettierrc
 jest.config.js
 tsconfig.json
+Dockerfile

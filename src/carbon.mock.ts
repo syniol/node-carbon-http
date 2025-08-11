@@ -1,7 +1,7 @@
-import { HttpStatusCode, NodeRequestClient } from './http'
-import { Buffer } from 'buffer'
-import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'http'
+import { Buffer } from 'node:buffer'
+import { ClientRequest, IncomingMessage as InSecureIncomingMessage } from 'node:http'
 
+import { HttpStatusCode, NodeRequestClient } from './http'
 
 export function CarbonClientMock(
   arg: string | Error,
