@@ -1,3 +1,5 @@
+import { ClientRequestArgs } from 'node:http';
+
 import { HttpStatusCode } from './codes'
 
 export interface NodeRequestOption {
@@ -27,7 +29,7 @@ export enum HttpProtocol {
   InSecureHTTP = 'http:',
 }
 
-export interface CarbonHttpRequestOption {
+export interface CarbonHttpRequestOption extends ClientRequestArgs {
   headers?: Record<string, string>
   method?: HttpMethod
   body?: string
