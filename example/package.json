@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "carbon-http": "^1.0.3",
+    "carbon-http": "^2.0.1",
     "carbon-http-local": "../dist"
   }
 }

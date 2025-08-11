@@ -1,4 +1,4 @@
-const { Request } = require("carbon-http-local");
+const { Request } = require('carbon-http');
 
 (async () => {
   const resp = await Request("https://yahoo.com")
