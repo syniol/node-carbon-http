@@ -1,15 +1,15 @@
-import { ClientRequestArgs, IncomingMessage } from "node:http";
+import { ClientRequestArgs, IncomingMessage } from 'node:http'
 
-import { HttpStatusCode } from "./codes";
+import { HttpStatusCode } from './codes'
 
 export interface NodeRequestOption {
-  path?: string;
-  hostname?: string;
-  host?: string;
-  headers?: Record<string, string>;
-  method?: HttpMethod;
-  body?: string | Uint8Array;
-  port?: number | string;
+  path?: string
+  hostname?: string
+  host?: string
+  headers?: Record<string, string>
+  method?: HttpMethod
+  body?: string | Uint8Array
+  port?: number | string
 }
 
 export enum HttpMethod {

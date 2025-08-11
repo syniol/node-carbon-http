@@ -72,14 +72,13 @@ function response<T>(
   headers: NodeJS.Dict<string | string[]>,
   incomingMessage: IncomingMessage,
 ): Readonly<CarbonHttpResponse<T>> {
-  const result: Readonly<string> = Buffer
-    .concat(dataBlocks)
-    .toString()
+  const result: Readonly<string> = Buffer.concat(dataBlocks).toString()
 
   return {
     incomingMessage,
     status: status,
     headers: headers,
+
     json(): T {
       return JSON.parse(result)
     },
