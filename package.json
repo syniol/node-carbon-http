@@ -19,9 +19,9 @@
     "type": "git",
     "url": "git+https://github.com/syniol/node-carbon-http.git"
   },
+  "private": false,
   "author": "Hadi Tajallaei <hadi@syniol.com>",
   "license": "Apache-2.0",
-  "private": false,
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "start": "cd example; npm i; npm start;cd ..;",
