@@ -15,7 +15,10 @@
   ],
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "repository": "https://github.com/syniol/node-carbon-http",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syniol/node-carbon-http.git"
+  },
   "author": "Hadi Tajallaei <hadi@syniol.com>",
   "license": "Apache-2.0",
   "private": false,
