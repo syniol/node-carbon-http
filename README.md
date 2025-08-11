@@ -21,6 +21,20 @@ require a third-party test library due to poor engineering of original
 library itself.
 
 
+## Quick Start
+First you need to install the Carbon HTTP Library for node.js ecosystem via npm or yarn package management.
+
+__NPM__:
+```shell
+npm i carbon-http
+```
+
+__YARN__:
+```shell
+yarn add carbon-http
+```
+
+
 ## How to use
 Simple Answer is it's very easy to use. You can find a few examples below 
 for most commonly used Methods: `GET`, `POST` in JavaScript and `DELETE` 
@@ -58,12 +72,12 @@ console.log(resp.json())
 ### POST Request Example
 
 ```js
-import { Request } from 'carbon-http';
+import { Request, HttpMethod } from 'carbon-http';
 
 const resp = await Request(
   'https://api.syniol.com/v2/user',
   {
-    method: 'POST',
+    method: HttpMethod.POST,
     body: JSON.stringify({
       username: 'myusername',
       email: 'myemail@email.com',
@@ -83,12 +97,12 @@ console.log(resp.json())
 
 ### TypeScript DELETE Example _<sup>(With HttpStatusCode Type)</sup>_
 ```js
-import { Request, HttpStatusCode } from 'carbon-http';
+import { Request, HttpMethod } from 'carbon-http';
 
 const resp = await Request(
   'https://api.syniol.com/v2/user/hadi/history/73',
   {
-    method: HttpStatusCode.DELETE,
+    method: HttpMethod.DELETE,
   }
 );
 ```
@@ -111,7 +125,7 @@ and accessible by `CarbonClientMock` for your unit tests.
 
 __JavaScript Mocking Library Example__
 ```js
-import { Request, CarbonClientMock } from 'carbon-http'
+import { Request, CarbonClientMock, HttpStatusCode } from 'carbon-http'
 
 const resp = await Request(
   'https://api.syniol.com/v2/user',
@@ -120,7 +134,7 @@ const resp = await Request(
     {
       status: 'success'
     }
-  ), 200),
+  ), HttpStatusCode.OK),
 );
 
 console.log(resp.json())
@@ -161,4 +175,4 @@ console.log(resp.json())
 
 
 ### Credits
-Copyright &copy; 2022 Syniol Limited. All rights reserved.
+Copyright &copy; 2022-25 Syniol Limited. All rights reserved.
