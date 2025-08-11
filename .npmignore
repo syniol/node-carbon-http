@@ -1,6 +1,7 @@
 # Folders
 src/
 test/
+coverage/
 .idea/
 
 

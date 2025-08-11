@@ -1,6 +1,5 @@
 import { Request, CarbonHttpResponse } from '../src'
 
-
 describe('Request Test', () => {
   const sut = Request
 
