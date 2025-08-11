@@ -3,9 +3,11 @@ src/
 test/
 .idea/
 
+
 # Files
 .gitignore
 .prettierrc
 jest.config.js
 tsconfig.json
 Dockerfile
+LICENSE
