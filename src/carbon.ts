@@ -5,7 +5,6 @@ import { request as InSecureRequest } from 'node:http'
 import { request as SecureRequest } from 'node:https'
 
 import {
-  NodeRequestClient,
   NodeRequestOption,
   CarbonHttpRequestOption,
   CarbonHttpResponse,
@@ -48,7 +47,6 @@ function response<T>(
 export function Request<T>(
   url: Readonly<string>,
   opt?: CarbonHttpRequestOption,
-  clientService?: NodeRequestClient | any,
 ): Promise<Readonly<CarbonHttpResponse<T>>> {
   const urlAPI = new URL(url)
   const nodeReqOpt: NodeRequestOption = {
@@ -63,14 +61,8 @@ export function Request<T>(
   }
 
   let client = InSecureRequest;
-  if (clientService) {
-    client = clientService;
-  }
-
   if (urlAPI.protocol === HttpProtocol.SecureHTTP) {
-    if (!clientService) {
-      client = SecureRequest
-    }
+    client = SecureRequest
 
     nodeReqOpt.hostname = urlAPI.hostname;
   } else {
