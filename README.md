@@ -1,27 +1,22 @@
 # Carbon HTTP
-![workflow](https://github.com/syniol/node-carbon-http/actions/workflows/makefile.yml/badge.svg)
+![workflow](https://github.com/syniol/node-carbon-http/actions/workflows/makefile.yml/badge.svg)    ![workflow](https://github.com/syniol/node-carbon-http/actions/workflows/npm_publish.yml/badge.svg)
 
-Carbon HTTP is simplified http(s) library exclusively for Node.js; 
-written in TypeScript and transpiled to JavaScript. It would be a 
-great replacement for libraries such as: node-fetch, request-promise, 
-end etc.
+Carbon HTTP is a user-friendly HTTP(s) library designed specifically for Node.js, developed in TypeScript 
+and subsequently converted to JavaScript. Carbon HTTP serves as an excellent alternative to libraries such 
+as node-fetch, request-promise, and similar options.
 
 
 ## Motivation
-There are few libraries for a same purpose but most are implemented 
-for both Browser API and Node runtime. Given exising libraries try to 
-meet the needs both Browser and Node API; it could cause many complications 
-for enterprise level applications. For example: forced upgrade due to 
-security vulnerability of many dependency of library itself. On the 
-other hand, __Carbon HTTP__ has no third-party dependency and been 
-developed and maintained in Great Britain by a Limited Company.
-
-Furthermore, writing unit test could be extremely frustrating and might 
-require a third-party test library due to poor engineering of original 
-library itself.
+A limited number of libraries are offered for this purpose, with the majority created 
+for both the Browser API and Node runtime. The existence of libraries that attempt to 
+serve the requirements of both the Browser and Node APIs can result in significant 
+challenges for enterprise-level applications. For instance, mandatory updates triggered 
+by security flaws in different dependencies of the library can pose problems. In 
+comparison, __Carbon HTTP__ is independent of third-party dependencies and has been 
+developed and maintained in the UK by a Limited Company.
 
 
-## Quick Start
+## Quickstart Guide
 First you need to install the Carbon HTTP Library for node.js ecosystem via npm or yarn package management.
 
 __NPM__:
@@ -117,6 +112,7 @@ Response from Promise Request, has the following APIs available:
 status            // example 200
 headers           // example { "accept-ranges": "bytes", "... }
 incomingMessage:  // example { "httpVersion": "1.1", "...} 
+
 text()            // example '<html><header>....</html>'
 json()            // example { status: "Success" }
 ```
