@@ -4,11 +4,12 @@ export interface CarbonError extends Error {
 
 export function NewCarbonError(
   msg: string,
+  name?: string,
   stack?: string,
   code?: number,
 ): Readonly<CarbonError> {
   const err: CarbonError = {
-    name: 'Carbon HTTP(s) Error',
+    name: name || 'CarbonHttpException',
     message: msg,
   }
 

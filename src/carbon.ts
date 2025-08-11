@@ -33,6 +33,7 @@ function response<T>(
       } catch (_) {
         throw NewCarbonError(
           'error parsing response as a valid JSON object',
+          'UnexpectedJSONFormatException',
           `actual response: ${this.text()}`,
           status,
         )
