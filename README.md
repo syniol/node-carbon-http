@@ -32,8 +32,7 @@ yarn add carbon-http
 
 ## How to use
 Simple Answer is it's very easy to use. You can find a few examples below 
-for most commonly used Methods: `GET`, `POST` in JavaScript and `DELETE` 
-in TypeScript below.
+for most commonly used Methods: `GET`, `POST`, and `DELETE` below.
 
 
 ### Module Import
@@ -117,7 +116,8 @@ text()            // example '<html><header>....</html>'
 json()            // example { status: "Success" }
 ```
 
-> Note: In TypeScript since the version `2.1.x`, you can defined the response type as a generic on `json() method`.
+> In TypeScript since the version `2.1.x`, you can define the response type as a generic on `json() method`.
+
 ```typescript
 interface UserResponse {}
 
