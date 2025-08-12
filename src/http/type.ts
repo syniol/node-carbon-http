@@ -36,12 +36,12 @@ export interface CarbonHttpRequestOption extends ClientRequestArgs {
   port?: number;
 }
 
-export interface CarbonHttpResponse<T> {
+export interface CarbonHttpResponse {
   status: HttpStatusCode;
   headers: NodeJS.Dict<string | string[]>;
   incomingMessage: IncomingMessage;
 
   text(): string;
 
-  json(): T;
+  json<T>(): T;
 }

@@ -4,7 +4,7 @@ describe('Request Test', () => {
   const sut = Request
 
   describe('given GET request is made', () => {
-    let actual: CarbonHttpResponse<any>;
+    let actual: CarbonHttpResponse;
 
     beforeAll(async () => {
       actual = await sut(

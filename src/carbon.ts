@@ -12,10 +12,10 @@ import {
   NodeRequestOption,
 } from './http'
 
-export function Request<T>(
+export function Request(
   url: Readonly<string>,
   opt?: CarbonHttpRequestOption,
-): Promise<Readonly<CarbonHttpResponse<T>>> {
+): Promise<Readonly<CarbonHttpResponse>> {
   const urlAPI = new URL(url)
   const nodeReqOpt: NodeRequestOption = {
     method: opt?.method || HttpMethod.GET,
@@ -66,12 +66,12 @@ export function Request<T>(
   })
 }
 
-function response<T>(
+function response(
   dataBlocks: Uint8Array[],
   status: Readonly<number>,
   headers: NodeJS.Dict<string | string[]>,
   incomingMessage: IncomingMessage,
-): Readonly<CarbonHttpResponse<T>> {
+): Readonly<CarbonHttpResponse> {
   const result: Readonly<string> = Buffer.concat(dataBlocks).toString()
 
   return {
@@ -79,7 +79,7 @@ function response<T>(
     status: status,
     headers: headers,
 
-    json(): T {
+    json<T>(): T {
       return JSON.parse(result)
     },
     text(): string {
