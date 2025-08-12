@@ -117,6 +117,14 @@ text()            // example '<html><header>....</html>'
 json()            // example { status: "Success" }
 ```
 
+> Note: In TypeScript since the version `2.1.x`, you can defined the response type as a generic on `json() method`.
+```typescript
+interface UserResponse {}
+
+// json<T>(): T
+const respBody = json<UserResponse>();
+```
+
 
 ### Credits
 Copyright &copy; 2022-2025 Syniol Limited. All rights reserved.
